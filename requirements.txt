@@ -1,0 +1,4 @@
+googlesearch-python
+django
+djangorestframework
+ipython
