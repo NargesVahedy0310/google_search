@@ -1,19 +1,17 @@
 from rest_framework import serializers
-from .models import *
 from .googel_search import *
 
 class SearchSerializers(serializers.Serializer):
+    # titles = serializers.CharField(max_length=255)
+    # urls = serializers.CharField(max_length=255)
     class Meta:
         model = Search
         fields = ('id', 'titles', 'urls')
 
 
 
-class SearchBoxSerializers(serializers.Serializer):
-    search_box = serializers.CharField(max_length=300)
-    number = serializers.IntegerField()
-    def create(self, validated_data):
-        return SearchBox.objects.create(**validated_data)
+class SearchBoxSerializers(serializers.ModelSerializer):
     class Meta:
         model = SearchBox
         fields = ('id', 'search_box', 'number')
+
