@@ -2,3 +2,4 @@ googlesearch-python
 django
 djangorestframework
 ipython
+djangorestframework-bulk

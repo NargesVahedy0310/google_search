@@ -1,13 +1,13 @@
 from django.db import models
 
 class SearchBox(models.Model):
-    search_box = models.CharField(max_length=300)
+    title = models.CharField(max_length=300)
     number = models.SmallIntegerField()
 
     def __str__(self):
-        return self.search_box
+        return self.title
 
-class Search(models.Model):
+class ValueSearch(models.Model):
     titles = models.CharField(max_length=255)
     urls = models.CharField(max_length=255)
 

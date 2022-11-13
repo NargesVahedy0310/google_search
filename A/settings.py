@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "search",
+    "googel_search",
     "rest_framework"
 ]
 
