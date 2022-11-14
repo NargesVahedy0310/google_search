@@ -7,6 +7,7 @@ class SearchBoxSerializers(serializers.ModelSerializer):
         fields = ('title', 'number')
 
 class ValueSearchSerializers(serializers.ModelSerializer):
+
     class Meta:
         model = ValueSearch
         fields = ('titles', 'urls')

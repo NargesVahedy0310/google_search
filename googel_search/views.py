@@ -1,23 +1,12 @@
 from rest_framework.response import Response
-from rest_framework import status, generics, mixins
+from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.decorators import api_view
-from rest_framework.views import APIView
-import json
 from .models import *
 from .serializers import *
 import time
 from googlesearch import search
 
-class A(ModelViewSet):
-    serializer_class = ValueSearch
-
-    def get_queryset(self):
-        return ValueSearch.objects.all()
-
-
-
-class B(ModelViewSet):
+class GoogelSearchAPI(ModelViewSet):
     serializer_class = SearchBoxSerializers
 
     def get_queryset(self):
@@ -41,17 +30,19 @@ class B(ModelViewSet):
                 urls.append(title.url)
                 print(list(zip(titles, urls)))
                 print(len(urls), '   ', len(titles))
-            data = {'titles': titles, 'urls': urls}
-            print(data)
-            serializer = ValueSearch(data=request.data)
+            data = {'titles': str(titles), 'urls': str(urls)}
+
+            serializer = ValueSearchSerializers(data=data)
+            print(type(serializer))
             serializer.is_valid(raise_exception=True)
             serializer.validated_data
             serializer.save()
-            print('------', serializer)
-        search_results(data_title, data_num-1)
+
+        search_results(data_title, data_num)
         time.sleep(5)
         return Response(serializer.data)
 
-class SearchListView(generics.ListCreateAPIView):
+class ValueSearchListView(generics.ListAPIView):
     queryset = ValueSearch.objects.all()
+    print(queryset)
     serializer_class = ValueSearchSerializers
