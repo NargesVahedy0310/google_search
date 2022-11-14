@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
-from .models import *
-from .serializers import *
+from .models import ValueSearch, SearchBox
+from .serializers import ValueSearchSerializers, SearchBoxSerializers
 import time
 from googlesearch import search
 
@@ -16,8 +16,7 @@ class GoogelSearchAPI(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.validated_data
         serializer.save()
-        # print(serializer)
-        print("==")
+        #search to google
         data_search = SearchBox.objects.all().values()
         last_data = data_search[::-1][0]
         data_title = last_data['title']
@@ -28,12 +27,10 @@ class GoogelSearchAPI(ModelViewSet):
             for title in search(query, num_results=number, advanced=advanced):
                 titles.append(title.title)
                 urls.append(title.url)
-                print(list(zip(titles, urls)))
-                print(len(urls), '   ', len(titles))
-            data = {'titles': str(titles), 'urls': str(urls)}
 
+            data = {'titles': str(titles), 'urls': str(urls)}
+            #desrializers data
             serializer = ValueSearchSerializers(data=data)
-            print(type(serializer))
             serializer.is_valid(raise_exception=True)
             serializer.validated_data
             serializer.save()
@@ -42,7 +39,16 @@ class GoogelSearchAPI(ModelViewSet):
         time.sleep(5)
         return Response(serializer.data)
 
+
 class ValueSearchListView(generics.ListAPIView):
     queryset = ValueSearch.objects.all()
-    print(queryset)
-    serializer_class = ValueSearchSerializers
+    # queryset = ValueSearch.objects.last()
+    """"اینحا اگه نگاه کنید پرینت ش رو بگیرید اخرین شو نشون میده """
+    # a = ValueSearch.objects.all().values().last()
+    # print(a)
+    serializer_class = ValueSearchSerializers()
+
+
+
+
+

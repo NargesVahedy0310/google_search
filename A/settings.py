@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     "googel_search",
-    "rest_framework"
+    "rest_framework",
+
 ]
 
 MIDDLEWARE = [
