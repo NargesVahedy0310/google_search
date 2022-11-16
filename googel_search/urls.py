@@ -9,7 +9,7 @@ router.register('search', GoogelSearchAPI, basename='searching')
 
 
 urlpatterns = [
-    path('search/show/', ValueSearchListView.as_view()),
+    path('search/show/', ValueSearching),
     path("", include(router.urls)),
 
 ]

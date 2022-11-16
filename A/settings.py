@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "googel_search",
     "rest_framework",
 
+
 ]
 
 MIDDLEWARE = [
