@@ -10,7 +10,7 @@ class ValueSearchSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = ValueSearch
-        fields = ('titles', 'urls')
+        fields = ('title', 'titles', 'urls')
 
         def create(self, validated_data):
             return ValueSearch.objects.create(**validated_data)
